@@ -6,6 +6,8 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import utilities.ScreenShotManager;
 
+import java.io.IOException;
+
 public class TestngListener implements ITestListener, IExecutionListener {
     @Override
     public void onExecutionStart(){
@@ -15,6 +17,11 @@ public class TestngListener implements ITestListener, IExecutionListener {
     @Override
     public void onExecutionFinish(){
         System.out.println("Generating reports.......");
+        try {
+            Runtime.getRuntime().exec("reportGeneration.bat");
+        } catch (IOException e) {
+            System.out.println("Unable to Generate Allure Report");
+        }
         System.out.println("******************** End of execution ******************");
     }
 
@@ -32,7 +39,7 @@ public class TestngListener implements ITestListener, IExecutionListener {
     public void onTestFailure(ITestResult result){
         System.out.println("Test Falied");
         System.out.println("Taking Screen shot.......");
-        ScreenShotManager.captureScreenshot(Driver.get(), result.getName());
+        //ScreenShotManager.captureScreenshot(Driver.get(), result.getName());
         System.out.println("************ Faliure of test " + result.getName() + " ***********");
     }
 }

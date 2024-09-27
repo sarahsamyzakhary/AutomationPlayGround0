@@ -1,6 +1,7 @@
 package newPages;
 
 import driverFactory.Driver;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -43,6 +44,7 @@ public class HomePage {
         Assert.assertTrue(driver.get().findElement(testCaseButton).isDisplayed());
         return this;
     }
+    @Step("checkThatProductLinkAppearSuccessfully")
     public HomePage checkThatProductLinkAppearSuccessfully(){
         Assert.assertTrue(driver.get().findElement(productLink).isDisplayed());
         return this;
